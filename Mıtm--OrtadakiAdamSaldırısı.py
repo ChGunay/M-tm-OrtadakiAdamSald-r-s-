@@ -24,6 +24,7 @@ def get_user_input():
         print("Enter Target ip")
     if not options.gateway_ip:
         print("Enter the Gateway ip")
+    return options
 def reset_operation(fooled_ip,gateway_ip):
 
     fooled_mac = get_macaddress(fooled_ip)
